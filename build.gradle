@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.0'
+    id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+description = 'e-commerce'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Web: Para crear la API REST
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    
+    // JPA: Para la persistencia de datos
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    
+    // Validation: Para @NotNull, @Min, etc. (Requerimiento de la prueba)
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    
+    // H2: Base de datos en memoria para la prueba
+    runtimeOnly 'com.h2database:h2'
+    
+    // Lombok: Para reducir el boilerplate (getters, setters)
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    
+    // Springdoc OpenAPI: Para Swagger (Requerimiento de la prueba)
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+    
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
